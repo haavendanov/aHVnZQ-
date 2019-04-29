@@ -1,0 +1,12 @@
+{
+   "type": "mysql",
+   "host": "localhost",
+   "port": 8889,
+   "username": "huge",
+   "password": "huge",
+   "database": "advertisement",
+   "synchronize": true,
+   "entities": [
+      "dist/entity/**/*.js"
+   ]
+}

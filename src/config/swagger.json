@@ -1,0 +1,233 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Advertisement API"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/advertisement": {
+      "post": {
+        "tags": [
+          "Advertisements"
+        ],
+        "summary": "Create an advertisement",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Advertisement"
+            }
+          },
+          "500": {
+            "description": "Error"
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The advertisement object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Advertisement"
+            }
+          }
+        ]
+      }
+    },
+    "/advertisement/:id": {
+      "get": {
+        "tags": [
+          "Advertisements"
+        ],
+        "summary": "Get an advertisement by the id",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Advertisement"
+            }
+          },
+          "500": {
+            "description": "Error"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the advertisement",
+            "required": true,
+            "type": "integer"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Advertisements"
+        ],
+        "summary": "Update an advertisement by the id",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Advertisement"
+            }
+          },
+          "500": {
+            "description": "Error"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the advertisement to update",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The advertisement object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Advertisement"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Advertisements"
+        ],
+        "summary": "Delete an advertisement by the id",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Error"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the advertisement to delete",
+            "required": true,
+            "type": "integer"
+          }
+        ]
+      }
+    },
+    "/advertisement/categories/:category": {
+      "get": {
+        "tags": [
+          "Searchs"
+        ],
+        "summary": "Search advertisements by category",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AdvertisementsArray"
+            }
+          },
+          "500": {
+            "description": "Error"
+          }
+        },
+        "parameters": [
+          {
+            "name": "category",
+            "in": "path",
+            "description": "The category to search the advertisements",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/advertisement/dates": {
+      "get": {
+        "tags": [
+          "Searchs"
+        ],
+        "summary": "Search advertisements by category",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AdvertisementsArray"
+            }
+          },
+          "500": {
+            "description": "Error"
+          }
+        },
+        "parameters": [
+          {
+            "name": "filterBy",
+            "in": "query",
+            "description": "The filter option to the advertisements (START -> start_datetime || END -> end_datetime), if not included as a query param then is filtered by start and end dates",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "The start date to filter the advertisements",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "description": "The end date to filter the advertisements",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Advertisement": {
+      "type": "object",
+      "properties": {
+        "category": {
+          "type": "string"
+        },
+        "offer_message": {
+          "type": "string"
+        },
+        "offer_graphic_url": {
+          "type": "string"
+        },
+        "start_datetime": {
+          "type": "string",
+          "example": "2018-01-01 00:00:00"
+        },
+        "end_datetime": {
+          "type": "string",
+          "example": "2018-01-01 00:00:00"
+        }
+      }
+    },
+    "AdvertisementsArray": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Advertisement"
+      }
+    }
+  }
+}
